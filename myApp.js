@@ -34,6 +34,7 @@ const addExercise = function(user, done){
         userReturned.save((err,data)=>{
             done(null , {
             _id : user._id,
+            username: data.username,
             description : user.description,
             duration : user.duration,
             date: currentDate
