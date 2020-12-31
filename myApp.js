@@ -6,7 +6,7 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema({
   username: {type: String, required: true},
-  exercise: [{description: String, duration: Number, date: Date} ]
+  log: [{description: String, duration: Number, date: Date} ]
 });
 
 const UserModel = mongoose.model('UserModel',userSchema);
@@ -24,10 +24,16 @@ const getUser = function(done){
     })
 }
 
+const getLogs = function(userId,done){
+    UserModel.find({_id: userId},(err,data)=>{
+        done(err,data);
+    })
+}
+
 const addExercise = function(user, done){
     currentDate = user.date && user.date != '' ? new Date(user.date) : new Date();
     UserModel.findById({_id: user._id},(err,userReturned)=>{
-        userReturned.exercise.push({
+        userReturned.log.push({
         description : user.description,
         duration : user.duration,
         date: currentDate
@@ -47,3 +53,4 @@ const addExercise = function(user, done){
 exports.createUser = createUser;
 exports.getUser = getUser;
 exports.addExercise = addExercise;
+exports.getLogs = getLogs;
