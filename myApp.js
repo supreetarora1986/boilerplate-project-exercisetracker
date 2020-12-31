@@ -1,4 +1,5 @@
 require('dotenv').config();
+var moment = require('moment');
 var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 const { Schema } = mongoose;
@@ -37,7 +38,7 @@ const addExercise = function(user, done){
             username: data.username,
             description : user.description,
             duration : parseInt(user.duration),
-            date: currentDate
+            date: moment(currentDate.getTime()).format("ddd, MMM DD YYYY")
             });
         })
       })
