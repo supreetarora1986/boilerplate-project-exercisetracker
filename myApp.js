@@ -38,7 +38,7 @@ const addExercise = function(user, done){
             username: data.username,
             description : user.description,
             duration : parseInt(user.duration),
-            date: moment(currentDate.getTime()).format("ddd, MMM DD YYYY")
+            date: moment(currentDate.getTime()).format("ddd MMM DD YYYY")
             });
         })
       })
