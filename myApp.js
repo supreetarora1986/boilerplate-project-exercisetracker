@@ -24,14 +24,20 @@ const getUser = function(done){
 }
 
 const addExercise = function(user, done){
+    currentDate = user.date && user.date != '' ? new Date(user.date) : new Date();
     UserModel.findById({_id: user._id},(err,userReturned)=>{
         userReturned.exercise.push({
         description : user.description,
         duration : user.duration,
-        date: user.date && user.date != '' ? user.date : new Date()
+        date: currentDate
         });
         userReturned.save((err,data)=>{
-            done(null , data);
+            done(null , {
+            _id : user._id,
+            description : user.description,
+            duration : user.duration,
+            date: currentDate
+            });
         })
       })
 }
