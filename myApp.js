@@ -36,7 +36,7 @@ const addExercise = function(user, done){
             _id : user._id,
             username: data.username,
             description : user.description,
-            duration : user.duration,
+            duration : parseInt(user.duration),
             date: currentDate
             });
         })
