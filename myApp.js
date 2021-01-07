@@ -48,7 +48,7 @@ const getLogs = function(userId,from,to,limit,done){
         }
         responseData.username = retData.username;
         if(limit){
-            responseData.log = retData.log.splice(0,limit - 1);
+            responseData.log = retData.log.splice(0,limit);
         }else{
             responseData.log = retData.log;
         }
