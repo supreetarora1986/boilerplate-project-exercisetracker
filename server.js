@@ -45,7 +45,7 @@ app.post('/api/exercise/add',(req,res)=>{
 });
 
 app.get('/api/exercise/log',(req,res)=>{
-    myapp.getLogs(req.query.userId,(err, data)=>{
+    myapp.getLogs(req.query.userId,req.query.from,req.query.to,req.query.limit,(err, data)=>{
         res.json(data);
     })
 
