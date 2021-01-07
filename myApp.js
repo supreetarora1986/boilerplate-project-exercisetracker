@@ -26,21 +26,35 @@ const getUser = function(done){
 }
 
 const getLogs = function(userId,from,to,limit,done){
-    if(from && to && limit){
-    UserModel.find({_id: userId,log: {date : {$gte: from, $lte: to}}},(err,data)=>{
-        var responseData;
+
+    UserModel.find({_id: userId},(err,data)=>{
+        let responseData = {
+         log : []
+        };
+        let retData = data[0];
+        let fromDate = from ? new Date(from) : undefined;
+        let toDate = to ? new Date(to) : undefined;
         console.log(data);
-        responseData.username = data[0].username;
-        responseData.log = data[0].splice(0,limit - 1);
+        if(fromDate && toDate){
+        retData.log.forEach(lg => {
+            logDate = new Date(lg.date);
+            if(logDate.getTime() >= fromDate.getTime() && logDate.getTime() <= toDate.getTime()){
+                responseData.log.push(lg);
+            }
+        });
+        }else{
+            responseData.log = retData.log;
+        }
+        responseData.username = retData.username;
+        if(limit){
+            responseData.log = retData.log.splice(0,limit - 1);
+        }else{
+            responseData.log = retData.log;
+        }
         responseData.count = responseData.log.length;
         done(err,responseData);
-    })
-    }else{
-    UserModel.findById({_id: userId},(err,data)=>{
-            data["count"] = data.log.length;
-            done(err,data);
-        })
-    }
+    });
+
 }
 
 const addExercise = function(user, done){
