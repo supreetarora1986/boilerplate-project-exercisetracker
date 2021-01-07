@@ -38,6 +38,7 @@ const getLogs = function(userId,from,to,limit,done){
         if(fromDate && toDate){
         retData.log.forEach(lg => {
             logDate = new Date(lg.date);
+            console.log(fromDate+' - '+toDate+' - '+logDate)
             if(logDate.getTime() >= fromDate.getTime() && logDate.getTime() <= toDate.getTime()){
                 responseData.log.push(lg);
             }
@@ -52,6 +53,7 @@ const getLogs = function(userId,from,to,limit,done){
             responseData.log = retData.log;
         }
         responseData.count = responseData.log.length;
+        console.log('response'+responseData);
         done(err,responseData);
     });
 
