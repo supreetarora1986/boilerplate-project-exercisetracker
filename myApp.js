@@ -6,6 +6,7 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema({
   username: {type: String, required: true},
+  count: Number,
   log: [{description: String, duration: Number, date: String} ]
 });
 
@@ -26,6 +27,7 @@ const getUser = function(done){
 
 const getLogs = function(userId,done){
     UserModel.findById({_id: userId},(err,data)=>{
+        data["count"] = data.log.length;
         done(err,data);
     })
 }
