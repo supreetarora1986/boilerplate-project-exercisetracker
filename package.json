@@ -11,7 +11,7 @@
 		"express": "^4.16.4",
 		"cors": "^2.8.5",
 		"mongodb": "3.6.3",
-		"mongoose": "5.11.8",
+		"mongoose": "5.13.15",
 		"body-parser": "^1.15.2",
 		"moment": "2.29.1"
 	},
